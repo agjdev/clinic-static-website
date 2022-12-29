@@ -1,0 +1,82 @@
+<?php
+
+// Set the folder path where the images are stored
+$folder = 'path/to/folder';
+
+// Scan the folder for image files
+$files = scandir($folder);
+
+// Loop through the array of files and display the images
+foreach ($files as $file) {
+    // Check if the file is an image
+    if (preg_match('/\.(jpg|jpeg|png|gif)$/', $file)) {
+        // Output the image tag with the source pointing to the file
+        echo '<img src="' . $folder . '/' . $file . '" alt="Image">';
+    }
+}
+
+----------------
+
+<?php
+
+// set folder path where images are stored
+$folderPath = "./images/";
+
+// set maximum number of images to display per page
+$perPage = 10;
+
+// check if page number is set in URL parameter
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+// calculate offset for pagination
+$offset = ($page - 1) * $perPage;
+
+// open the folder and read the images
+$images = array_slice(scandir($folderPath), 2);
+
+// slice the images array based on the pagination offset and per page limit
+$paginatedImages = array_slice($images, $offset, $perPage);
+
+// display the paginated images
+foreach ($paginatedImages as $image) {
+    echo "<img src='" . $folderPath . $image . "' alt='Image'>";
+}
+
+// calculate total number of pages based on total number of images and per page limit
+$totalPages = ceil(count($images) / $perPage);
+
+// display pagination links
+echo "<br><br>";
+for ($i = 1; $i <= $totalPages; $i++) {
+    echo "<a href='?page=" . $i . "'>" . $i . "</a> ";
+}
+
+
+?>
+
+
+<?php
+
+$limit = 6; 
+
+for ($init_count = 0; $init_count < $limit; $init_count++) {
+  echo '<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+    <img
+      src="assets/images/elements/a2.jpg"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Boat on Calm Water"
+    />
+
+ 
+  </div>';
+  
+  }
+
+ 
+  
+  
+  ?>
